@@ -1,0 +1,6 @@
+{
+  "name": "شبكة البدر نت",
+  "description": "بوابة تسجيل الدخول وشبكة البدر نت للاتصالات والإنترنت اللاسلكي",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

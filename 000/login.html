@@ -1,0 +1,44 @@
+<!-- $(if var == "")
+<script>window.location.href = "index.html"</script>$(else) $(if error == "") { "logged_in": "$(logged-in)",
+"link_login_only": "$(link-login-only)", "link_logout": "$(link-logout)", "link_status": "$(link-status)", "nas_id":
+"$(identity)", "ip": "$(ip)", "mac": "$(mac-esc)", "trial": "$(trial)", "username": "$(username)", "action":
+"onLoginStart" } $(else) { "logged_in" : "$(logged-in)", "link_login_only" : "$(link-login-only)", "error_orig" :
+"$(error-orig)", "error" : "$(error)", "username" : "$(username)", "mac": "$(mac-esc)", "trial": "$(trial)", "action" :
+"onLoginError" } $(endif) $(endif) -->
+<!-- 
+  NOTE: This file is essential for the login process.
+  It catches the user, shows them index.html, and provides variables.
+  The user never sees this file directly.
+-->
+$(if chap-id)
+	<form name="sendin" action="$(link-login-only)" method="post">
+		<input type="hidden" name="username" />
+		<input type="hidden" name="password" />
+		<input type="hidden" name="dst" value="$(link-orig)" />
+		<input type="hidden" name="popup" value="true" />
+	</form>
+	
+	<script type="text/javascript" src="md5.js"></script>
+	<script type="text/javascript">
+	<!--
+	    function doLogin() {
+		document.sendin.username.value = document.login.username.value;
+		document.sendin.password.value = hexMD5('$(chap-id)' + document.login.password.value + '$(chap-challenge)');
+		document.sendin.submit();
+		return false;
+	    }
+	//-->
+	</script>
+$(endif)
+
+<script>
+    var error = "$(error-orig)";
+    if (error && error !== '' && !error.startsWith('$(')) {
+        // If there is a real error message, redirect with it.
+        window.location.href = "index.html?error=" + encodeURIComponent(error);
+    } else {
+        // Otherwise, redirect without an error.
+        window.location.href = "index.html";
+    }
+</script>
+

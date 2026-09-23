@@ -1,0 +1,114 @@
+$(if var == "")
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#070B14">
+    <title>شبكة البدر نت اللاسلكية</title>
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #060911 !important;
+            background-image: radial-gradient(circle at 50% 12%, rgba(223, 171, 82, 0.09) 0%, transparent 50%),
+                              radial-gradient(circle at 80% 80%, rgba(12, 19, 34, 0.8) 0%, transparent 60%),
+                              radial-gradient(circle at 20% 50%, rgba(8, 14, 26, 0.9) 0%, transparent 60%) !important;
+            color: #ffffff;
+            font-family: system-ui, -apple-system, sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        .instant-splash {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 16px;
+        }
+        .instant-spinner {
+            width: 44px;
+            height: 44px;
+            border: 3.5px solid rgba(223, 171, 82, 0.2);
+            border-top-color: #DFAB52;
+            border-radius: 50%;
+            animation: instant-spin 0.65s linear infinite;
+        }
+        .instant-brand {
+            font-size: 1.1rem;
+            font-weight: 800;
+            color: #DFAB52;
+            letter-spacing: 0.5px;
+        }
+        @keyframes instant-spin {
+            to { transform: rotate(360deg); }
+        }
+    </style>
+    <script>
+        var error = "$(error-orig)";
+        if (error && error !== '' && !error.startsWith('$(')) {
+            window.location.replace("index.html?error=" + encodeURIComponent(error));
+        } else {
+            window.location.replace("index.html");
+        }
+    </script>
+</head>
+<body>
+    <div class="instant-splash">
+        <div class="instant-spinner"></div>
+        <div class="instant-brand">شبكة البدر نت</div>
+    </div>
+
+$(if chap-id)
+	<form name="sendin" action="$(link-login-only)" method="post">
+		<input type="hidden" name="username" />
+		<input type="hidden" name="password" />
+		<input type="hidden" name="dst" value="$(link-orig)" />
+		<input type="hidden" name="popup" value="true" />
+	</form>
+	
+	<script type="text/javascript" src="md5.js"></script>
+	<script type="text/javascript">
+	<!--
+	    function doLogin() {
+		document.sendin.username.value = document.login.username.value;
+		document.sendin.password.value = hexMD5('$(chap-id)' + document.login.password.value + '$(chap-challenge)');
+		document.sendin.submit();
+		return false;
+	    }
+	//-->
+	</script>
+$(endif)
+</body>
+</html>
+$(else)
+$(if error == "")
+{
+"logged_in": 		"$(logged-in)",
+"link_only":		"$(link-orig-esc)",
+"link_login_only": 	"$(link-login-only)",
+"link_logout":		"$(link-logout)",
+"link_status":		"$(link-status)",
+"nas_id": 		    "$(identity)",
+"ip": 		        "$(ip)",
+"mac": 		        "$(mac-esc)",
+"trial": 		    "$(trial)",
+"username": 		"$(username)",
+"action":           "onLoginStart"
+}
+$(else)
+{
+"logged_in" 	    : "$(logged-in)",
+"link_login_only" 	: "$(link-login-only)",
+"error_orig"		: "$(error-orig)",
+"error"				: "$(error)",
+"username"			: "$(username)",
+"mac"				: "$(mac-esc)",
+"trial"				: "$(trial)",
+"action"			: "onLoginError"
+}
+$(endif)
+$(endif)
