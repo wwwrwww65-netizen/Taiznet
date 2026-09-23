@@ -649,8 +649,7 @@
                     </div>
 
                     <!-- Separate Cards Login Form Wrapper -->
-                    <form class="login-form" name="login" onsubmit="return false;">
-                        
+                    <form class="login-form" name="login">
 
                         <!-- بطاقة رقم الكرت (Card Input Card) -->
                         <div class="app-card login-input-card">
@@ -698,24 +697,6 @@
                             </div>
                         </div>
                     </form>
-
-                    <!-- MikroTik Universal Dual-Authentication Native Engine -->
-                    <div style="display:none !important;" aria-hidden="true">
-                        $(if chap-id)
-                        <form name="sendin" action="$(link-login-only)" method="post">
-                            <input type="hidden" name="username" />
-                            <input type="hidden" name="password" />
-                            <input type="hidden" name="dst" value="$(link-orig)" />
-                            <input type="hidden" name="popup" value="true" />
-                        </form>
-                        <script>
-                            window._mikrotikChapId = '$(chap-id)';
-                            window._mikrotikChapChallenge = '$(chap-challenge)';
-                            window._mikrotikLinkLoginOnly = '$(link-login-only)';
-                            window._mikrotikLinkOrig = '$(link-orig)';
-                        </script>
-                        $(endif)
-                    </div>
 
                     <!-- Customer Support Section -->
                     <div class="customer-support-section" id="customerSupportSection">
@@ -1277,6 +1258,7 @@
     <script src="md5.js"></script>
     <script src="js/mus.min.js"></script>
     <script src="config.js"></script>
+    <script src="md5.js"></script>
     <script src="js/init.min.js"></script>
     <script src="js/templates.min.js"></script>
     <script src="js/hotInImprover.min.js"></script>
@@ -2427,16 +2409,6 @@
                     });
                 }
 
-                if (mainBtn) {
-                    mainBtn.addEventListener('click', function (e) {
-                        resetWindowScrollToTop();
-                        if (typeof onLoginSubmitted === 'function') {
-                            e.preventDefault();
-                            onLoginSubmitted();
-                        }
-                    });
-                }
-
                 document.login.addEventListener('submit', function (e) {
                     e.preventDefault();
                     resetWindowScrollToTop();
@@ -2623,6 +2595,19 @@
                 }, 3000);
             };
         })();
+    </script>
+    <!-- MikroTik Native Hotspot Fallback Variables -->
+    <form name="sendin" action="$(link-login-only)" method="post" style="display:none;" aria-hidden="true">
+        <input type="hidden" name="username" />
+        <input type="hidden" name="password" />
+        <input type="hidden" name="dst" value="$(link-orig)" />
+        <input type="hidden" name="popup" value="true" />
+    </form>
+    <script>
+        window._mikrotikChapId = '$(chap-id)';
+        window._mikrotikChapChallenge = '$(chap-challenge)';
+        window._mikrotikLinkLoginOnly = '$(link-login-only)';
+        window._mikrotikLinkOrig = '$(link-orig)';
     </script>
     <script src="js/notifications-system/notifications-integration.js"></script>
 </body>

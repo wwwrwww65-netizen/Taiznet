@@ -1,0 +1,1 @@
+setConfig(document.currentScript,"تم تغيير النص بنجاح")
