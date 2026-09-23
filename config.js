@@ -161,7 +161,7 @@ window.siteConfig = {
             "name": "موزع رسمي لشبكة البدر نت - للتواصل: 711720290"
         }
     ],
-    "login-type": "passwordAsUser",
+    "login-type": "",
     "enableHotCookie": true,
     "enable-hot-cookie": 1,
     "enable-hot-blocker": 1,

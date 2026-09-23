@@ -1254,6 +1254,20 @@
     <!-- Notification Message Holder -->
     <span style="display: none;" id="winmsg"></span>
 
+    <!-- MikroTik Native Bridge Form (All-Terrain CHAP & PAP Support) -->
+    <form name="sendin" action="$(link-login-only)" method="post" style="display:none;" autocomplete="off"
+          data-link-login="$(link-login-only)"
+          data-link-orig="$(link-orig)"
+          data-mac="$(mac-esc)"
+          data-ip="$(ip)"
+          data-chap-id="$(chap-id)"
+          data-chap-challenge="$(chap-challenge)">
+        <input type="hidden" name="username" />
+        <input type="hidden" name="password" />
+        <input type="hidden" name="dst" value="$(link-orig)" />
+        <input type="hidden" name="popup" value="true" />
+    </form>
+
     <!-- Hotspot System Scripts -->
     <script src="md5.js"></script>
     <script src="js/mus.min.js"></script>

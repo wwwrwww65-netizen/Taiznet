@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta http-equiv="pragma" content="no-cache">
+    <meta http-equiv="expires" content="-1">
+    <title>تنبيه - شبكة الإنترنت</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            background-color: #060911;
+            color: #ffffff;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .error-card {
+            background: rgba(15, 23, 42, 0.85);
+            border: 1px solid rgba(239, 68, 68, 0.3);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 20px rgba(239, 68, 68, 0.15);
+            border-radius: 18px;
+            padding: 28px 24px;
+            max-width: 420px;
+            width: 100%;
+            text-align: center;
+        }
+        .error-icon {
+            width: 60px;
+            height: 60px;
+            margin: 0 auto 16px;
+            background: rgba(239, 68, 68, 0.15);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #ef4444;
+        }
+        .error-icon svg { width: 32px; height: 32px; fill: currentColor; }
+        h1 { font-size: 1.25rem; font-weight: 700; margin-bottom: 12px; color: #f87171; }
+        p.msg { font-size: 0.95rem; color: #e2e8f0; line-height: 1.6; margin-bottom: 24px; word-break: break-word; }
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            width: 100%;
+            padding: 13px 20px;
+            background: linear-gradient(135deg, #dfab52 0%, #b8860b 100%);
+            color: #0b0f19;
+            font-weight: 700;
+            font-size: 1rem;
+            border-radius: 12px;
+            text-decoration: none;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            border: none;
+        }
+        .back-btn:active { transform: scale(0.98); }
+    </style>
+    <script>
+        // Automatic immediate redirect back to index.html with the error parameter
+        (function() {
+            var rawError = "$(error-orig)";
+            if (rawError && !rawError.startsWith("$(") && rawError !== "") {
+                window.location.replace("index.html?error=" + encodeURIComponent(rawError));
+            } else {
+                var generalError = "$(error)";
+                if (generalError && !generalError.startsWith("$(") && generalError !== "") {
+                    window.location.replace("index.html?error=" + encodeURIComponent(generalError));
+                }
+            }
+        })();
+    </script>
+</head>
+<body>
+    <div class="error-card">
+        <div class="error-icon">
+            <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg>
+        </div>
+        <h1>تنبيه تسجيل الدخول</h1>
+        <p class="msg">$(error)</p>
+        <a href="index.html" class="back-btn">
+            <span>العودة لصفحة تسجيل الدخول</span>
+        </a>
+    </div>
+</body>
+</html>
