@@ -4,11 +4,32 @@
 <head>
     <meta charset="UTF-8">
     <script>
-        try {
-            if (localStorage.getItem("hotspot_active_session") === "1" || /(?:^|;\s*)hotspot_active_session=1/.test(document.cookie)) {
-                document.documentElement.classList.add("initial-status-mode");
-            }
-        } catch(e) {}
+        (function() {
+            try {
+                var mkLoggedIn = "$(logged-in)";
+                var isMk = mkLoggedIn && !mkLoggedIn.startsWith("$(");
+                if (isMk) {
+                    if (mkLoggedIn === "yes") {
+                        try {
+                            localStorage.setItem("hotspot_active_session", "1");
+                            document.cookie = "hotspot_active_session=1;path=/;max-age=2592000";
+                        } catch(e) {}
+                        document.documentElement.classList.add("initial-status-mode");
+                    } else if (mkLoggedIn === "no") {
+                        try {
+                            localStorage.removeItem("hotspot_active_session");
+                            document.cookie = "hotspot_active_session=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/";
+                        } catch(e) {}
+                        document.documentElement.classList.remove("initial-status-mode");
+                    }
+                } else {
+                    var hasActive = localStorage.getItem("hotspot_active_session") === "1" || /(?:^|;\s*)hotspot_active_session=1/.test(document.cookie);
+                    if (hasActive) {
+                        document.documentElement.classList.add("initial-status-mode");
+                    }
+                }
+            } catch(e) {}
+        })();
     </script>
     <title data-network-name>شبكة البدر نت اللاسلكية</title>
     <meta name="description" content="بوابة تسجيل الدخول وشبكة البدر نت للاتصالات والإنترنت اللاسلكي">
@@ -326,7 +347,7 @@
 <body translate="no">
     <script>
         try {
-            if (localStorage.getItem("hotspot_active_session") === "1" || /(?:^|;\s*)hotspot_active_session=1/.test(document.cookie)) {
+            if (document.documentElement.classList.contains("initial-status-mode") || localStorage.getItem("hotspot_active_session") === "1" || /(?:^|;\s*)hotspot_active_session=1/.test(document.cookie)) {
                 document.body.classList.add("has-active-session");
             }
         } catch(e) {}

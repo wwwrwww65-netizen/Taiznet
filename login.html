@@ -49,6 +49,18 @@ $(if var == "")
     </style>
     <script>
         var error = "$(error-orig)";
+        var mkLoggedIn = "$(logged-in)";
+        if (mkLoggedIn === "yes") {
+            try {
+                localStorage.setItem("hotspot_active_session", "1");
+                document.cookie = "hotspot_active_session=1;path=/;max-age=2592000";
+            } catch(e) {}
+        } else if (mkLoggedIn === "no") {
+            try {
+                localStorage.removeItem("hotspot_active_session");
+                document.cookie = "hotspot_active_session=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/";
+            } catch(e) {}
+        }
         if (error && error !== '' && !error.startsWith('$(')) {
             window.location.replace("index.html?error=" + encodeURIComponent(error));
         } else {

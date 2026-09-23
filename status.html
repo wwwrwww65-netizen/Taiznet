@@ -6,7 +6,19 @@ $(if var == "")
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#070B14">
     <style>html, body { margin:0; padding:0; width:100%; height:100%; background:#060911 !important; }</style>
-    <script>window.location.replace("index.html");</script>
+    <script>
+        try {
+            var mkLoggedIn = "$(logged-in)";
+            if (mkLoggedIn === "yes" || mkLoggedIn.startsWith("$(")) {
+                localStorage.setItem("hotspot_active_session", "1");
+                document.cookie = "hotspot_active_session=1;path=/;max-age=2592000";
+            } else if (mkLoggedIn === "no") {
+                localStorage.removeItem("hotspot_active_session");
+                document.cookie = "hotspot_active_session=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/";
+            }
+        } catch(e) {}
+        window.location.replace("index.html");
+    </script>
 </head>
 <body style="background:#060911;"></body>
 </html>
