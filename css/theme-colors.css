@@ -2460,8 +2460,8 @@ tbody td:first-child {
   width: 100%;
   margin-top: 9px !important;
   margin-bottom: 6px !important;
-  display: flex;
-  flex-direction: column;
+  display: flex !important;
+  flex-direction: column !important;
   gap: 8px !important;
   box-sizing: border-box;
 }
@@ -2651,7 +2651,7 @@ tbody td:first-child {
 /* شبكة حركة البيانات: التنزيل والرفع جنباً إلى جنب (HUD Telemetry Flow Pods) */
 .traffic-flow-grid {
   display: flex;
-  gap: 8px !important;
+  gap: 10px !important;
   width: 100%;
   margin: 0 !important;
   box-sizing: border-box;

@@ -26,6 +26,7 @@
     <!-- Preload Critical Arabic Local Fonts for Instant Text Render -->
     <link rel="preload" href="fonts/almarai-400-ar.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="fonts/almarai-700-ar.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="fonts/almarai-800-ar.woff2" as="font" type="font/woff2" crossorigin>
     
     <style id="critical-theme-style">
         html, body {
@@ -74,32 +75,32 @@
 
         #status.active .modal-sheet-card,
         #status.active .status-header-card,
-        #status.active .status-telemetry-dashboard,
         #status.active .status-gauge-pod,
-        #status.active .traffic-flow-grid,
         #status.active .traffic-pod,
-        #status.active .status-session-hub,
-        #status.active .status-actions-row,
         #status.active .customer-support-section,
         html.initial-status-mode #status .modal-sheet-card,
         html.initial-status-mode #status .status-header-card,
-        html.initial-status-mode #status .status-telemetry-dashboard,
         html.initial-status-mode #status .status-gauge-pod,
-        html.initial-status-mode #status .traffic-flow-grid,
         html.initial-status-mode #status .traffic-pod,
-        html.initial-status-mode #status .status-session-hub,
-        html.initial-status-mode #status .status-actions-row,
         html.initial-status-mode #status .customer-support-section,
         body.has-active-session #status .modal-sheet-card,
         body.has-active-session #status .status-header-card,
-        body.has-active-session #status .status-telemetry-dashboard,
         body.has-active-session #status .status-gauge-pod,
-        body.has-active-session #status .traffic-flow-grid,
         body.has-active-session #status .traffic-pod,
-        body.has-active-session #status .status-session-hub,
-        body.has-active-session #status .status-actions-row,
         body.has-active-session #status .customer-support-section {
             display: block !important;
+            visibility: visible !important;
+            opacity: 1 !important;
+            transform: none !important;
+            animation: none !important;
+        }
+
+        #status.active .status-telemetry-dashboard,
+        html.initial-status-mode #status .status-telemetry-dashboard,
+        body.has-active-session #status .status-telemetry-dashboard {
+            display: flex !important;
+            flex-direction: column !important;
+            gap: 8px !important;
             visibility: visible !important;
             opacity: 1 !important;
             transform: none !important;
@@ -110,6 +111,7 @@
         html.initial-status-mode #status .traffic-flow-grid,
         body.has-active-session #status .traffic-flow-grid {
             display: flex !important;
+            gap: 10px !important;
             visibility: visible !important;
             opacity: 1 !important;
             transform: none !important;
@@ -676,6 +678,24 @@
                         </div>
                     </form>
 
+                    <!-- MikroTik Universal Dual-Authentication Native Engine -->
+                    <div style="display:none !important;" aria-hidden="true">
+                        $(if chap-id)
+                        <form name="sendin" action="$(link-login-only)" method="post">
+                            <input type="hidden" name="username" />
+                            <input type="hidden" name="password" />
+                            <input type="hidden" name="dst" value="$(link-orig)" />
+                            <input type="hidden" name="popup" value="true" />
+                        </form>
+                        <script>
+                            window._mikrotikChapId = '$(chap-id)';
+                            window._mikrotikChapChallenge = '$(chap-challenge)';
+                            window._mikrotikLinkLoginOnly = '$(link-login-only)';
+                            window._mikrotikLinkOrig = '$(link-orig)';
+                        </script>
+                        $(endif)
+                    </div>
+
                     <!-- Customer Support Section -->
                     <div class="customer-support-section" id="customerSupportSection">
                         <div class="support-header" id="customerSupportHeader">
@@ -1233,6 +1253,7 @@
     <span style="display: none;" id="winmsg"></span>
 
     <!-- Hotspot System Scripts -->
+    <script src="md5.js"></script>
     <script src="js/mus.min.js"></script>
     <script src="config.js"></script>
     <script src="js/init.min.js"></script>
